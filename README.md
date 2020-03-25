@@ -4,7 +4,7 @@
 - [Requirements](#Requirements)
 - [RPi software setup](#RPi software setup)
 - [Software installation](#Software installation)
-- [Systemd service setup](#Systemd service setup)
+- [Networkscan service setup](#Networkscan service setup)
 - [Bluetooth destination setup](#Bluetooth destination setup)
 - [How it works](#How it works)
 - [Demo](#Demo)
@@ -47,7 +47,7 @@ Install required python packages
 ```
 # pip3 install -r /home/pi/networkscan/requirements.txt
 ```
-### Systemd service setup
+### Networkscan service setup
 Create networkscan service
 ```
 # sudo vi /etc/systemd/system/networkscan.service
