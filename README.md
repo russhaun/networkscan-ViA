@@ -108,7 +108,7 @@ bt-obex -p MAC_ADDRESS /tmp/output.txt
 ### Receiving scanned results from Raspberry Pi
 ![Bluetooth android](bluetooth_android.gif)
 ### Service behavior - Interface DOWN
-- **Keeps restarting indefinitely if no network detected**
+- **Keeps restarting every 30 seconds indefinitely if no network detected**
 
 ![Interface DOWN](interface_down.gif)
 ### Networkscan program
