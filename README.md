@@ -1,5 +1,5 @@
 # Networkscan
-> Raspberry Pi local network device scanner - open port, default password check for multiple vendors.
+> Raspberry Pi local network device scanner - open port and default password checking for multiple vendors.
 ### Requirements
 Raspberry Pi Model 3 or 4
 ### Linux software setup
@@ -36,7 +36,7 @@ Install required python packages
 ```
 # pip3 install -r /home/pi/networkscan/requirements.txt
 ```
-### Networkscan service setup
+### Networkscan systemd service setup
 Create networkscan service
 ```
 # sudo vi /etc/systemd/system/networkscan.service
