@@ -3,13 +3,21 @@
 ### Requirements
 Raspberry Pi Model 3 or 4
 ### Installation
-Nmap:
+Install Nmap
 ```
 # sudo apt-get install python3-nmap -y
 ```
-Bluez-tools:
+Install Bluez-tools
 ```
 # sudo apt-get install bluez-tools -y
+```
+Install Git
+```
+# sudo apt-get install git -y
+```
+Clone repository
+```
+# git clone https://github.com/tomsozolins/networkscan.git /home/pi/networkscan
 ```
 ## How it works
 ### Raspberry Pi
