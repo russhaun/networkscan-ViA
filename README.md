@@ -2,17 +2,16 @@
 > Raspberry Pi local network device scanner - open port and default password checking for multiple vendors.
 ## Table of Contents
 - [Requirements](#Requirements)
-- [RPi software setup](#RPi-software-setup)
-- [Software installation](#Software-installation)
-- [Networkscan service setup](#Networkscan-service-setup)
-- [Bluetooth destination setup](#Bluetooth-destination-setup)
+- [Installation](#Installation)
 - [How it works](#How-it-works)
 - [Demo](#Demo)
 - [Author](#Author)
 - [License](#License)
 
-### Requirements
+## Requirements
 Raspberry Pi Model 3 or 4
+
+## Installation
 ### RPi software setup
 Nmap - for scanning network
 ```
