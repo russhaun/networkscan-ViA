@@ -2,7 +2,7 @@
 > Raspberry Pi local network device scanner - open port and default password checking for multiple vendors.
 ### Requirements
 Raspberry Pi Model 3 or 4
-### Linux software setup
+### RPi software setup
 Nmap - for scanning network
 ```
 # sudo apt-get install python3-nmap -y
@@ -15,7 +15,7 @@ Git - for cloning repository
 ```
 # sudo apt-get install git -y
 ```
-### Networkscan software installation
+### Software installation
 Clone repository
 ```
 # git clone https://github.com/tomsozolins/networkscan.git /home/pi/networkscan
@@ -36,7 +36,7 @@ Install required python packages
 ```
 # pip3 install -r /home/pi/networkscan/requirements.txt
 ```
-### Networkscan systemd service setup
+### Systemd service setup
 Create networkscan service
 ```
 # sudo vi /etc/systemd/system/networkscan.service
@@ -62,6 +62,15 @@ Enable networkscan service at startup
 ```
 # sudo systemctl enable networkservice
 ```
+
+## Software setup
+Bluetooth destination
+```
+# sudo vi /home/pi/networkscan/Main.py
+```
+```
+
+```
 ## How it works
 ### Raspberry Pi
 ![Process flow diagram](process_flow_diagram.png)
@@ -69,7 +78,7 @@ Enable networkscan service at startup
 ![Program flow diagram](program_flow_diagram.png)
 
 ## Author
-* **Toms Ozolins**
+* **Toms Ozoliņš**
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
