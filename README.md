@@ -1,5 +1,16 @@
 # Networkscan
 > Raspberry Pi local network device scanner - open port and default password checking for multiple vendors.
+## Table of Contents
+- [Requirements](#Requirements)
+- [RPi software setup](#RPi software setup)
+- [Software installation](#Software installation)
+- [Systemd service setup](#Systemd service setup)
+- [Bluetooth destination setup](#Bluetooth destination setup)
+- [How it works](#How it works)
+- [Demo](#Demo)
+- [Author](#Author)
+- [License](#License)
+
 ### Requirements
 Raspberry Pi Model 3 or 4
 ### RPi software setup
@@ -63,7 +74,7 @@ Enable networkscan service at startup
 # sudo systemctl enable networkservice
 ```
 
-## Configure Bluetooth destination
+## Bluetooth destination setup
 Get your phone MAC address
 ```
 # sudo hcitool scan
