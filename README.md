@@ -2,19 +2,20 @@
 > Raspberry Pi local network device scanner - open port, default password check for multiple vendors.
 ### Requirements
 Raspberry Pi Model 3 or 4
-### Installation
-Install Nmap
+### Linux software setup
+Nmap
 ```
 # sudo apt-get install python3-nmap -y
 ```
-Install Bluez-tools
+Bluez-tools
 ```
 # sudo apt-get install bluez-tools -y
 ```
-Install Git
+Git
 ```
 # sudo apt-get install git -y
 ```
+### Networkscan software installation
 Clone repository
 ```
 # git clone https://github.com/tomsozolins/networkscan.git /home/pi/networkscan
@@ -35,10 +36,12 @@ Install required python packages
 ```
 # pip3 install -r /home/pi/networkscan/requirements.txt
 ```
+### Networkscan service setup
 Create networkscan service
 ```
 # sudo vi /etc/systemd/system/networkscan.service
 ```
+
 networkscan.service content
 ```
 [Unit]
