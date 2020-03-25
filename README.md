@@ -70,7 +70,7 @@ WantedBy=multi-user.target
 ```
 Enable networkscan service at startup
 ```console
-pi@raspberrypi:~ $ sudo systemctl enable networkservice
+pi@raspberrypi:~ $ sudo systemctl enable networkscan
 ```
 
 ### Bluetooth destination setup
