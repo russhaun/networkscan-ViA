@@ -3,15 +3,15 @@
 ### Requirements
 Raspberry Pi Model 3 or 4
 ### Linux software setup
-Nmap
+Nmap - for scanning network
 ```
 # sudo apt-get install python3-nmap -y
 ```
-Bluez-tools
+Bluez-tools - for bluetooth file transfer
 ```
 # sudo apt-get install bluez-tools -y
 ```
-Git
+Git - for cloning repository
 ```
 # sudo apt-get install git -y
 ```
