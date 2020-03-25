@@ -104,7 +104,7 @@ bt-obex -p MAC_ADDRESS /tmp/output.txt
 - **Sleep 30 seconds and restart service**
 
 ![Interface UP](interface_up.gif)
-### Receiving scanning results from RPi to Android phone
+### Receiving scanned results from RPi to Android phone
 ![Bluetooth android](bluetooth_android.gif)
 ### Service behavior - Interface DOWN
 ### Networkscan program
