@@ -109,6 +109,7 @@ bt-obex -p MAC_ADDRESS /tmp/output.txt
 ![Bluetooth android](bluetooth_android.gif)
 ### Service behavior - Interface DOWN
 - **Keeps restarting indefinitely if no network detected**
+
 ![Interface DOWN](interface_down.gif)
 ### Networkscan program
 ![Program flow diagram](program_flow_diagram.png)
