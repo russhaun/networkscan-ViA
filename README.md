@@ -93,7 +93,9 @@ bt-obex -p MAC_ADDRESS /tmp/output.txt
 ## How it works
 ### Raspberry Pi
 ![Process flow diagram](process_flow_diagram.png)
+### Service behavior - Interface UP
 ![Interface UP](interface_up.gif)
+### Service behavior - Interface DOWN
 ### Networkscan program
 ![Program flow diagram](program_flow_diagram.png)
 
