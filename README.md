@@ -14,12 +14,12 @@ Raspberry Pi Model 3 or 4
 ## Installation
 ### RPi software setup
 Nmap - for scanning network
-```bash
-# sudo apt-get install python3-nmap -y
+```shell script
+sudo apt-get install python3-nmap -y
 ```
 Bluez-tools - for bluetooth file transfer
-```bash
-# sudo apt-get install bluetooth bluez-tools -y
+```shell script
+sudo apt-get install bluetooth bluez-tools -y
 ```
 Git - for cloning repository
 ```shell script
@@ -83,7 +83,7 @@ Scanning ...
         A8:7D:12:51:91:37       HUAWEI P20 lite
 ```
 Modify Bluetooth destination
-```sh
+```shell script
 sudo vi /home/pi/networkscan/Main.py
 ```
 Replace MAC_ADDRESS with your destination MAC
