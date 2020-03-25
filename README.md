@@ -1,5 +1,5 @@
 # Networkscan
-> Raspberry Pi local network device scanner by vendor and default password checker.
+> Raspberry Pi local network device scanner - open port, default password check for multiple vendors.
 ### Requirements
 Raspberry Pi Model 3 or 4
 ### Installation
@@ -12,9 +12,9 @@ Bluez-tools:
 # sudo apt-get install bluez-tools -y
 ```
 ## How it works
-#####Raspberry Pi
+####Raspberry Pi
 ![Process flow diagram](process_flow_diagram.png)
-#####Networkscan program
+####Networkscan program
 ![Program flow diagram](program_flow_diagram.png)
 
 ## Author
