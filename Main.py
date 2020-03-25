@@ -5,13 +5,6 @@ from requests.auth import HTTPDigestAuth
 import socket
 import sys
 import subprocess
-# import time
-import os
-
-
-# save output to text file with timestamp
-# timestr = time.strftime("%d%m%Y-%H%M%S")
-# sys.stdout = open(timestr +'.txt' , "w")
 
 
 
@@ -23,9 +16,6 @@ def get_ip_address():
 
 
 networkIP = get_ip_address()
-
-# temp ip for testing
-# networkIP = '10.11.14.15'
 
 # Convert networkIP to 0/24 subnet ip range
 network = networkIP[:networkIP.rfind('.') + 1] + '0/24'
