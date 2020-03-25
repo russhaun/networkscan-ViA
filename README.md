@@ -4,12 +4,13 @@
 - [Requirements](#Requirements)
 - [Installation](#Installation)
 - [How it works](#How-it-works)
-- [Demo](#Demo)
 - [Author](#Author)
 - [License](#License)
 
 ## Requirements
 Raspberry Pi Model 3 or 4
+
+Raspberry Pi 1 or 2 - external bluetooth adapter required
 
 ## Installation
 ### RPi software setup
@@ -95,11 +96,11 @@ bt-obex -p MAC_ADDRESS /tmp/output.txt
 ![Process flow diagram](process_flow_diagram.png)
 ### Service behavior - Interface UP
 ![Interface UP](interface_up.gif)
+### Sending output to Android phone
+![Android Bluetooth](android_bluetooth.gif)
 ### Service behavior - Interface DOWN
 ### Networkscan program
 ![Program flow diagram](program_flow_diagram.png)
-
-## Demo
 
 ## Author
 * **Toms Ozoliņš**
