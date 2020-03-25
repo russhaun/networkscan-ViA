@@ -22,37 +22,37 @@ Bluez-tools - for bluetooth file transfer
 # sudo apt-get install bluetooth bluez-tools -y
 ```
 Git - for cloning repository
-```bash
-# sudo apt-get install git -y
+```shell script
+sudo apt-get install git -y
 ```
 ### Software installation
 Clone repository
-```bash
-# git clone https://github.com/tomsozolins/networkscan.git /home/pi/networkscan
+```shell script
+git clone https://github.com/tomsozolins/networkscan.git /home/pi/networkscan
 ```
 Navigate to networkscan directory
-```bash
-# cd /home/pi/networkscan
+```shell script
+cd /home/pi/networkscan
 ```
 Create virtual environment
-```
-# python3 -m venv venv
+```shell script
+python3 -m venv venv
 ```
 Activate virtual environment
-```bash
-# . /home/pi/networkscan/venv/bin/activate
+```shell script
+. /home/pi/networkscan/venv/bin/activate
 ```
 Install required python packages
-```bash
-# pip3 install -r /home/pi/networkscan/requirements.txt
+```shell script
+pip3 install -r /home/pi/networkscan/requirements.txt
 ```
 ### Networkscan service setup
 Create networkscan service
-```bash
-# sudo vi /etc/systemd/system/networkscan.service
+```shell script
+sudo vi /etc/systemd/system/networkscan.service
 ```
 
-networkscan.service content
+networkscan.service
 ```
 [Unit]
 Description=networkscan service
@@ -69,21 +69,21 @@ RestartSec=30
 WantedBy=multi-user.target
 ```
 Enable networkscan service at startup
-```bash
-# sudo systemctl enable networkservice
+```shell script
+sudo systemctl enable networkservice
 ```
 
 ### Bluetooth destination setup
 Get your phone MAC address
-```bash
-# sudo hcitool scan
+```shell script
+sudo hcitool scan
 ```
 ```
 Scanning ...
         A8:7D:12:51:91:37       HUAWEI P20 lite
 ```
 Modify Bluetooth destination
-```bash
+```shell script
 sudo vi /home/pi/networkscan/Main.py
 ```
 Replace MAC_ADDRESS with your destination MAC
