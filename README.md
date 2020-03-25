@@ -74,7 +74,7 @@ Enable networkscan service at startup
 # sudo systemctl enable networkservice
 ```
 
-## Bluetooth destination setup
+### Bluetooth destination setup
 Get your phone MAC address
 ```
 # sudo hcitool scan
