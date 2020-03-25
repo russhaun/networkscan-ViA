@@ -9,7 +9,7 @@ Nmap - for scanning network
 ```
 Bluez-tools - for bluetooth file transfer
 ```
-# sudo apt-get install bluez-tools -y
+# sudo apt-get install bluetooth bluez-tools -y
 ```
 Git - for cloning repository
 ```
@@ -63,19 +63,31 @@ Enable networkscan service at startup
 # sudo systemctl enable networkservice
 ```
 
-## Software setup
-Bluetooth destination
+## Configure Bluetooth destination
+Get your phone MAC address
+```
+# sudo hcitool scan
+```
+Example output
+```
+Scanning ...
+        A8:7D:12:51:91:37       HUAWEI P20 lite
+```
+Modify Bluetooth destination
 ```
 # sudo vi /home/pi/networkscan/Main.py
 ```
+Replace MAC_ADDRESS with your destination MAC
 ```
-
+bt-obex -p MAC_ADDRESS /tmp/output.txt
 ```
 ## How it works
 ### Raspberry Pi
 ![Process flow diagram](process_flow_diagram.png)
 ### Networkscan program
 ![Program flow diagram](program_flow_diagram.png)
+
+## Demo
 
 ## Author
 * **Toms Ozoliņš**

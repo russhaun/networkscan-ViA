@@ -118,7 +118,8 @@ network_scan('Mobotix AG', 'Hangzhou Hikvision Digital Technology', 'Axis Commun
 
 # send scan results output file from RPi to remote Android device via Bluetooth
 # https://stackoverflow.com/questions/8556777/dbus-php-unable-to-launch-dbus-daemon-without-display-for-x11?rq=1
-res = subprocess.Popen('eval \'dbus-launch --auto-syntax\' bt-obex -p A8:7D:12:51:91:37 /tmp/output.txt', shell=True,
+# A8:7D:12:51:91:37
+res = subprocess.Popen('eval \'dbus-launch --auto-syntax\' bt-obex -p MAC_ADDRESS /tmp/output.txt', shell=True,
                        stdout=subprocess.PIPE)
 # Wait for the process end and print error in case of failure
 if res.wait() != 0:
