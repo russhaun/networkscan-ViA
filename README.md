@@ -92,7 +92,7 @@ Replace MAC_ADDRESS with your destination MAC
 ```python3
 bt-obex -p MAC_ADDRESS /tmp/output.txt
 ```
-## How networkscan works
+## How it works
 ### Raspberry Pi
 ![Process flow diagram](process_flow_diagram.png)
 ### Service behavior - Interface UP
