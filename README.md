@@ -83,8 +83,8 @@ Scanning ...
         A8:7D:12:51:91:37       HUAWEI P20 lite
 ```
 Modify Bluetooth destination
-```shell script
-sudo vi /home/pi/networkscan/Main.py
+```console
+pi@raspberrypi:~$ sudo vi /home/pi/networkscan/Main.py
 ```
 Replace MAC_ADDRESS with your destination MAC
 ```python3
