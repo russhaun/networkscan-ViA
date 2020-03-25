@@ -1,5 +1,5 @@
 # Networkscan
-> Raspberry Pi local network device scanner - open port and default password checking for multiple vendors.
+> Raspberry Pi local network device scanner - specific tcp port status and default password checker for various vendors.
 ## Table of Contents
 - [Requirements](#Requirements)
 - [Installation](#Installation)
@@ -8,9 +8,9 @@
 - [License](#License)
 
 ## Requirements
-Raspberry Pi Model 3 or 4
+Raspberry Pi 3/4
 
-Raspberry Pi 1 or 2 - external bluetooth adapter required
+Raspberry Pi 1/2 not tested (external bluetooth adapter required)
 
 ## Installation
 ### Linux software setup
