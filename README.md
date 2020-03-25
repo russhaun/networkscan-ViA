@@ -84,7 +84,7 @@ Scanning ...
 ```
 Modify Bluetooth destination
 ```bash
-# sudo vi /home/pi/networkscan/Main.py
+sudo vi /home/pi/networkscan/Main.py
 ```
 Replace MAC_ADDRESS with your destination MAC
 ```python3
