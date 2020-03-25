@@ -95,6 +95,14 @@ bt-obex -p MAC_ADDRESS /tmp/output.txt
 ### Raspberry Pi
 ![Process flow diagram](process_flow_diagram.png)
 ### Service behavior - Interface UP
+- **Start python networkscan software**
+    - Scan network hosts with Nmap
+    - Scan defined open ports for found vendor hosts
+    - Do http auth request with default manufacturer password
+- **Save scanning results to /tmp/output.txt**
+- **Send output.txt to remote destination via Bluetooth**
+- **Sleep 30 seconds and restart service**
+
 ![Interface UP](interface_up.gif)
 ### Receiving scanning results from RPi to Android phone
 ![Bluetooth android](bluetooth_android.gif)
