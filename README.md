@@ -99,7 +99,7 @@ bt-obex -p MAC_ADDRESS /tmp/output.txt
     - Scan network hosts with Nmap
     - Scan defined open ports for found vendor hosts
     - Do http auth request with default manufacturer password
-- **Save scanning results to /tmp/output.txt**
+- **Write scanned results to /tmp/output.txt**
 - **Send output.txt to remote destination via Bluetooth**
 - **Sleep 30 seconds and restart service**
 
