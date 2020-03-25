@@ -13,7 +13,7 @@ Raspberry Pi Model 3 or 4
 Raspberry Pi 1 or 2 - external bluetooth adapter required
 
 ## Installation
-### RPi software setup
+### Linux software setup
 Nmap - for scanning network
 ```console
 pi@raspberrypi:~ $ sudo apt-get install python3-nmap -y
@@ -26,7 +26,7 @@ Git - for cloning repository
 ```console
 pi@raspberrypi:~ $ sudo apt-get install git -y
 ```
-### Software installation
+### Networkscan setup
 Clone repository
 ```console
 pi@raspberrypi:~ $ git clone https://github.com/tomsozolins/networkscan.git /home/pi/networkscan
@@ -79,6 +79,7 @@ Get your phone MAC address
 ```console
 pi@raspberrypi:~ $ sudo hcitool scan
 ```
+Example output
 ```
 Scanning ...
         A8:7D:12:51:91:37       HUAWEI P20 lite
