@@ -12,9 +12,9 @@ Bluez-tools:
 # sudo apt-get install bluez-tools -y
 ```
 ## How it works
-### Raspberry Pi
+Raspberry Pi
 ![Process flow diagram](process_flow_diagram.png)
-### Networkscan program
+Networkscan program
 ![Program flow diagram](program_flow_diagram.png)
 
 ## Author
