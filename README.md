@@ -96,7 +96,7 @@ bt-obex -p MAC_ADDRESS /tmp/output.txt
 ![Process flow diagram](process_flow_diagram.png)
 ### Service behavior - Interface UP
 ![Interface UP](interface_up.gif)
-### Sending output to Android phone
+### Receiving scanning results from RPi to Android phone
 ![Bluetooth android](bluetooth_android.gif)
 ### Service behavior - Interface DOWN
 ### Networkscan program
