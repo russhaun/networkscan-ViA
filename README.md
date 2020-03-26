@@ -9,7 +9,7 @@
 - [Author](#Author)
 - [License](#License)
 
-## Intended usage
+## Usage
 
 - **Power on Raspberry Pi using power bank for portability and stealth**
 - **Connect Raspberry Pi network interface to target network**
