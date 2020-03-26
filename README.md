@@ -32,7 +32,7 @@ How to use
 - **Start python networkscan software**
     - Scan network hosts with Nmap
     - Scan defined open ports for found vendor hosts
-    - Do http auth request with default manufacturer password
+    - Do http auth request with default manufacturer credentials
 - **Write scanned results to /tmp/output.txt**
 - **Send output.txt to remote destination via Bluetooth**
 - **Sleep 30 seconds and restart service**
