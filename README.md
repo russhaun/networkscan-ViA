@@ -30,6 +30,15 @@
 ### Networkscan program
 ![Program flow diagram](program_flow_diagram.png)
 
+## Intended usage
+
+- **Power on Raspberry Pi using power bank**
+- **Attach Raspberry Pi to target network**
+- **Network scanning will begin automatically without user intervention**
+- **Scanned results will be automatically sent to your phone for stealthy network inspection**
+- **Keep scanning other networks without user intervention simply by plugging network cable in other target network**
+
+
 ## Requirements
 Raspberry Pi 3/4
 
