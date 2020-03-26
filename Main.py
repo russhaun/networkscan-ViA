@@ -53,6 +53,7 @@ def network_scan(*argv):
                                 if port_state == 'open':
                                     print(f'port : {port}\tstate : {port_state}')
 
+                    # http request function
                     def http_request(default_login, default_pw, url_location):
                         # http digest get request (Digest Authentication communicates credentials in an encrypted form by
                         # applying a hash function to: the username, the password,
