@@ -11,7 +11,7 @@
 
 ## Intended usage
 Network scanning - open port checking and try authenticate
-to devices using default manufacturer credentials. 
+to devices using default manufacturer credentials
 
 May be used for auditing purposes to encourage administrators to 
 properly configure devices with secure protocols and strong passwords
