@@ -10,7 +10,7 @@
 - [License](#License)
 
 ## Intended usage
-Network scanning - open port checking and http request sending
+Network scanning - open port checking and try authenticate
 to devices using default manufacturer credentials. 
 
 May be used for auditing purposes to encourage administrators to 
