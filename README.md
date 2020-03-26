@@ -1,12 +1,22 @@
 # Networkscan
 > Raspberry Pi automatic local network device scanner - specific tcp port status and default password checker for various vendors.
 ## Table of Contents
+- [Intended usage](#Intended-usage)
 - [How it works](#How-it-works)
 - [Requirements](#Requirements)
 - [Installation](#Installation)
 - [Supported vendors](#Supported-vendors)
 - [Author](#Author)
 - [License](#License)
+
+## Intended usage
+
+- **Power on Raspberry Pi using power bank for portability and stealth**
+- **Attach Raspberry Pi to target network**
+- **Network scanning will begin automatically without user intervention**
+- **Scanned results will be automatically sent to your phone for stealthy network inspection**
+- **Keep scanning other networks without user intervention simply by plugging network cable in other target network**
+
 
 ## How it works
 ### Raspberry Pi
@@ -18,7 +28,7 @@
     - Do http auth request with default manufacturer password
 - **Write scanned results to /tmp/output.txt**
 - **Send output.txt to remote destination via Bluetooth**
-- **Sleep 30 seconds and restart service**
+- **Sleep 15 seconds and restart service**
 
 ![Interface UP](interface_up.gif)
 ### Receiving scanned results from Raspberry Pi
@@ -29,14 +39,6 @@
 ![Interface DOWN](interface_down.gif)
 ### Networkscan program
 ![Program flow diagram](program_flow_diagram.png)
-
-## Intended usage
-
-- **Power on Raspberry Pi using power bank**
-- **Attach Raspberry Pi to target network**
-- **Network scanning will begin automatically without user intervention**
-- **Scanned results will be automatically sent to your phone for stealthy network inspection**
-- **Keep scanning other networks without user intervention simply by plugging network cable in other target network**
 
 
 ## Requirements
@@ -96,7 +98,7 @@ User=pi
 WorkingDirectory=/home/pi/
 ExecStart=/home/pi/networkscan/venv/bin/python3 /home/pi/networkscan/Main.py
 Restart=always
-RestartSec=30
+RestartSec=15
 
 [Install]
 WantedBy=multi-user.target
