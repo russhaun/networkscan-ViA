@@ -1,5 +1,5 @@
 # Networkscan
-> Raspberry Pi automatic local network device scanner - specific tcp port status and default password checker for various vendors
+> Raspberry Pi automatic network device scanner - specific tcp port status and default password checker for various vendors
 ## Table of Contents
 - [Intended usage](#Intended-usage)
 - [How it works](#How-it-works)
@@ -10,18 +10,7 @@
 - [License](#License)
 
 ## Intended usage
-Network scanning - open port checking and try authenticate
-to devices using default manufacturer credentials
 
-May be used for auditing purposes to encourage administrators to 
-properly configure devices with secure protocols and strong passwords
-
-Main benefits using Raspberry Pi
-- **portability**
-- **almost no user intervention needed**
-- **stealth and speed**
-
-How to use
 - **Power on Raspberry Pi using power bank for portability and stealth**
 - **Connect Raspberry Pi network interface to target network**
 - **Network scanning will begin automatically without user intervention**
