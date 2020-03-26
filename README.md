@@ -23,7 +23,7 @@ Main benefits using Raspberry Pi
 
 How to use
 - **Power on Raspberry Pi using power bank for portability and stealth**
-- **Attach Raspberry Pi to target network**
+- **Connect Raspberry Pi network interface to target network**
 - **Network scanning will begin automatically without user intervention**
 - **Scanned results will be automatically sent to your phone for stealthy network inspection**
 - **Keep scanning other networks without user intervention simply by plugging network cable in other target network**
