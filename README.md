@@ -10,8 +10,15 @@
 - [License](#License)
 
 ## Intended usage
-Project goal is to automatically scan local network, check open ports and try authenticate to devices with default manufacturer credentials
+Project goal is to automatically scan local network with Raspberry Pi - check open unsecure ports and try authenticate 
+to devices with default manufacturer credentials. 
 
+Main benefits using Raspberry Pi
+- **portability**
+- **almost no user intervention needed**
+- **stealth and speed**
+
+How to use
 - **Power on Raspberry Pi using power bank for portability and stealth**
 - **Attach Raspberry Pi to target network**
 - **Network scanning will begin automatically without user intervention**
