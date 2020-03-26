@@ -1,7 +1,7 @@
 # Networkscan
 > Raspberry Pi automatic network device scanner - specific tcp port status and default password checker for various vendors
 ## Table of Contents
-- [Intended usage](#Intended-usage)
+- [Usage](#Usage)
 - [How it works](#How-it-works)
 - [Requirements](#Requirements)
 - [Installation](#Installation)
