@@ -27,13 +27,13 @@
     - Do http auth request with default manufacturer password
 - **Write scanned results to /tmp/output.txt**
 - **Send output.txt to remote destination via Bluetooth**
-- **Sleep 15 seconds and restart service**
+- **Sleep 30 seconds and restart service**
 
 ![Interface UP](interface_up.gif)
 ### Receiving scanned results from Raspberry Pi
 ![Bluetooth android](bluetooth_android.gif)
 ### Service behavior - Interface DOWN
-- **Keeps restarting every 15 seconds indefinitely if no network detected**
+- **Keeps restarting every 30 seconds indefinitely if no network detected**
 
 ![Interface DOWN](interface_down.gif)
 ### Networkscan program
