@@ -4,6 +4,7 @@
 - [Requirements](#Requirements)
 - [Installation](#Installation)
 - [How it works](#How-it-works)
+- [Currently supported vendors](#Currently-supported-vendors)
 - [Author](#Author)
 - [License](#License)
 
