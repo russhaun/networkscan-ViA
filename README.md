@@ -10,6 +10,7 @@
 - [License](#License)
 
 ## Intended usage
+Project goal is to automatically scan local network, check open ports and try authenticate to devices with default manufacturer credentials
 
 - **Power on Raspberry Pi using power bank for portability and stealth**
 - **Attach Raspberry Pi to target network**
