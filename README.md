@@ -10,8 +10,8 @@
 - [License](#License)
 
 ## Intended usage
-Project goal is to automatically scan local network with Raspberry Pi - check open unsecure ports and try authenticate 
-to devices with default manufacturer credentials. 
+Network scanning - open port checking and http request sending
+to devices using default manufacturer credentials. 
 
 Main benefits using Raspberry Pi
 - **portability**
