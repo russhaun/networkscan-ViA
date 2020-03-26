@@ -17,7 +17,6 @@
 - **Scanned results will be automatically sent to your phone for stealthy network inspection**
 - **Keep scanning other networks without user intervention simply by plugging network cable in other target network**
 
-
 ## How it works
 ### Raspberry Pi
 ![Process flow diagram](process_flow_diagram.png)
@@ -34,7 +33,7 @@
 ### Receiving scanned results from Raspberry Pi
 ![Bluetooth android](bluetooth_android.gif)
 ### Service behavior - Interface DOWN
-- **Keeps restarting every 30 seconds indefinitely if no network detected**
+- **Keeps restarting every 15 seconds indefinitely if no network detected**
 
 ![Interface DOWN](interface_down.gif)
 ### Networkscan program
