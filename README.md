@@ -13,6 +13,9 @@
 Network scanning - open port checking and http request sending
 to devices using default manufacturer credentials. 
 
+May be used for auditing purposes to encourage administrators to 
+properly configure devices with secure protocols and strong passwords
+
 Main benefits using Raspberry Pi
 - **portability**
 - **almost no user intervention needed**
