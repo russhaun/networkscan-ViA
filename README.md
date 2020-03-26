@@ -4,7 +4,7 @@
 - [Requirements](#Requirements)
 - [Installation](#Installation)
 - [How it works](#How-it-works)
-- [Currently supported vendors](#Currently-supported-vendors)
+- [Supported vendors](#Supported-vendors)
 - [Author](#Author)
 - [License](#License)
 
@@ -116,7 +116,7 @@ bt-obex -p MAC_ADDRESS /tmp/output.txt
 ### Networkscan program
 ![Program flow diagram](program_flow_diagram.png)
 
-## Currently supported vendors
+## Supported vendors
 - **Mobotix AG**
 - **Hangzhou Hikvision Digital Technology**
 - **Axis Communications AB**
