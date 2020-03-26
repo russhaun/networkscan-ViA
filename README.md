@@ -26,7 +26,7 @@ How to use
 - **Connect Raspberry Pi network interface to target network**
 - **Network scanning will begin automatically without user intervention**
 - **Scanned results will be automatically sent to your phone for stealthy network inspection**
-- **Keep scanning other networks without user intervention simply by plugging network cable in other target network**
+- **Keep scanning other networks without interruption by plugging network cable in other target network**
 
 ## How it works
 ### Raspberry Pi
