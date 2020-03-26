@@ -1,12 +1,34 @@
 # Networkscan
 > Raspberry Pi automatic local network device scanner - specific tcp port status and default password checker for various vendors.
 ## Table of Contents
+- [How it works](#How-it-works)
 - [Requirements](#Requirements)
 - [Installation](#Installation)
-- [How it works](#How-it-works)
 - [Supported vendors](#Supported-vendors)
 - [Author](#Author)
 - [License](#License)
+
+## How it works
+### Raspberry Pi
+![Process flow diagram](process_flow_diagram.png)
+### Service behavior - Interface UP
+- **Start python networkscan software**
+    - Scan network hosts with Nmap
+    - Scan defined open ports for found vendor hosts
+    - Do http auth request with default manufacturer password
+- **Write scanned results to /tmp/output.txt**
+- **Send output.txt to remote destination via Bluetooth**
+- **Sleep 30 seconds and restart service**
+
+![Interface UP](interface_up.gif)
+### Receiving scanned results from Raspberry Pi
+![Bluetooth android](bluetooth_android.gif)
+### Service behavior - Interface DOWN
+- **Keeps restarting every 30 seconds indefinitely if no network detected**
+
+![Interface DOWN](interface_down.gif)
+### Networkscan program
+![Program flow diagram](program_flow_diagram.png)
 
 ## Requirements
 Raspberry Pi 3/4
@@ -93,28 +115,6 @@ Replace MAC_ADDRESS with your destination MAC
 ```python3
 bt-obex -p MAC_ADDRESS /tmp/output.txt
 ```
-
-## How it works
-### Raspberry Pi
-![Process flow diagram](process_flow_diagram.png)
-### Service behavior - Interface UP
-- **Start python networkscan software**
-    - Scan network hosts with Nmap
-    - Scan defined open ports for found vendor hosts
-    - Do http auth request with default manufacturer password
-- **Write scanned results to /tmp/output.txt**
-- **Send output.txt to remote destination via Bluetooth**
-- **Sleep 30 seconds and restart service**
-
-![Interface UP](interface_up.gif)
-### Receiving scanned results from Raspberry Pi
-![Bluetooth android](bluetooth_android.gif)
-### Service behavior - Interface DOWN
-- **Keeps restarting every 30 seconds indefinitely if no network detected**
-
-![Interface DOWN](interface_down.gif)
-### Networkscan program
-![Program flow diagram](program_flow_diagram.png)
 
 ## Supported vendors
 - **Mobotix AG**
