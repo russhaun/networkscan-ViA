@@ -7,7 +7,6 @@ import sys
 import subprocess
 
 
-
 # Get current host ip address
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -15,71 +14,70 @@ def get_ip_address():
     return s.getsockname()[0]
 
 
-networkIP = get_ip_address()
+interface_ip = get_ip_address()
 
 # Convert networkIP to 0/24 subnet ip range
-network = networkIP[:networkIP.rfind('.') + 1] + '0/24'
+network_cidr = interface_ip[:interface_ip.rfind('.') + 1] + '0/24'
 
 # tcp ports to scan for each vendor device
-port_list = '21,22,80,81,8080'
+target_port_list = '21,22,80,81,8080'
 
 
 def network_scan(*argv):
-    # save output to text file without timestamp
-    sys.stdout = open('/tmp/output.txt', "w")
-    # scan for mac and vendor
-    nm = nmap.PortScanner()
-    nm.scan(network, port_list, arguments='-sS', sudo=True)
-    for host in nm.all_hosts():
-        # searches for mac and vendors
-        if 'mac' in nm[host]['addresses']:
-            # Initialize target_ip variable as global for use in http_request function
-            global target_ip
-            # regex host_ip vendor output > convert to string > strip symbols
-            target_ip = str(nm[host]['addresses']).lstrip('{\'ipv4\': \'')[:-19].strip('\', \'mac\': \'')
-            for vendorArg in argv:
-                # vendor list definition > regex nmap vendor output > convert to string > strip symbols
-                vendor_str = (str(re.findall(vendorArg, str(nm[host]['vendor'])))[2:][:-2])
+    # save print output to text file
+    with open('/tmp/output.txt', "w") as sys.stdout:
+        # scan for mac and vendor
+        nm = nmap.PortScanner()
+        nm.scan(network_cidr, target_port_list, arguments='-sS', sudo=True)
+        for host in nm.all_hosts():
+            # searches for mac and vendors
+            if 'mac' in nm[host]['addresses']:
+                # Initialize target_ip variable as global for use in http_request function
+                global target_ip
+                # regex host_ip vendor output > convert to string > strip symbols
+                target_ip = str(nm[host]['addresses']).lstrip('{\'ipv4\': \'')[:-19].strip('\', \'mac\': \'')
+                for arg in argv:
+                    # vendor list definition > regex nmap vendor output > convert to string > strip symbols
+                    vendor_str = (str(re.findall(arg, str(nm[host]['vendor'])))[2:][:-2])
 
-                # print only devices with specified vendors in vendor_str variable
-                if vendorArg in vendor_str:
-                    print('----------------------------------------')
-                    print(target_ip)
-                    print(vendor_str)
-                    for proto in nm[host].all_protocols():
-                        lport = nm[host][proto].keys()
-                        for port in lport:
-                            # only print result for open ports
-                            if nm[host][proto][port]['state'] == 'open':
-                                print('port : {}\tstate : {}'.format(port, nm[host][proto][port]['state']))
+                    # print only devices with specified vendors in vendor_str variable
+                    if arg in vendor_str:
+                        print('----------------------------------------')
+                        print(target_ip)
+                        print(vendor_str)
+                        for proto in nm[host].all_protocols():
+                            ports = nm[host][proto].keys()
+                            for port in ports:
+                                port_state = nm[host][proto][port]["state"]
+                                # only print result for open ports
+                                if port_state == 'open':
+                                    print(f'port : {port}\tstate : {port_state}')
+                    # call http_request function if device vendor name contains target vendor
+                    if vendor_str == 'Mobotix AG':
+                        # Mobotix: Default - admin/meinsm
+                        http_request('admin', 'meinsm', '/control/userimage.html')
 
-                # call http_request function if device vendor name contains target vendor
-                if vendor_str == 'Mobotix AG':
-                    # Mobotix: Default - admin/meinsm
-                    http_request('admin', 'meinsm', '/control/userimage.html')
+                    if vendor_str == 'Hangzhou Hikvision Digital Technology':
+                        # Hikvision: Firmware 5.3.0 and up requires unique password creation; previously admin/12345
+                        http_request('admin', '12345', '/ISAPI/System/status')
 
-                if vendor_str == 'Hangzhou Hikvision Digital Technology':
-                    # Hikvision: Firmware 5.3.0 and up requires unique password creation; previously admin/12345
-                    http_request('admin', '12345', '/ISAPI/System/status')
+                    if vendor_str == 'Axis Communications AB':
+                        # Axis: Traditionally root/pass, new Axis cameras require password creation during first login
+                        http_request('root', 'pass', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
 
-                if vendor_str == 'Axis Communications AB':
-                    # Axis: Traditionally root/pass, new Axis cameras require password creation during first login
-                    http_request('root', 'pass', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
+                    if vendor_str == 'Zhejiang Dahua Technology':
+                        # Dahua: Requires password creation on first login, older models default to admin/admin
+                        http_request('admin', 'admin', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
 
-                if vendor_str == 'Zhejiang Dahua Technology':
-                    # Dahua: Requires password creation on first login, older models default to admin/admin
-                    http_request('admin', 'admin', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
+                    if vendor_str == 'Panasonic Communications Co':
+                        # Panasonic TV default user: dispadmin/@Panasonic
+                        http_request('dispadmin', '@Panasonic', '/cgi-bin/main.cgi')
 
-                if vendor_str == 'Panasonic Communications Co':
-                    # Panasonic TV default user: dispadmin/@Panasonic
-                    http_request('dispadmin', '@Panasonic', '/cgi-bin/main.cgi')
+                    if vendor_str == 'Eaton':
+                        # Eaton UPS default user: admin/admin
+                        http_request('admin', 'admin', '/set_net.htm')
 
-                if vendor_str == 'Eaton':
-                    # Eaton UPS default user: admin/admin
-                    http_request('admin', 'admin', '/set_net.htm')
-
-    print('Scanning finished')
-    sys.stdout.close()
+        print('Scanning finished')
 
 
 def http_request(default_login, default_pw, url_location):
@@ -87,7 +85,7 @@ def http_request(default_login, default_pw, url_location):
     # applying a hash function to: the username, the password,
     # a server supplied nonce value, the HTTP method and the requested URI. )
     try:
-        response = requests.get('http://' + target_ip + url_location, auth=HTTPDigestAuth(default_login, default_pw),
+        response = requests.get(f'http://{target_ip}{url_location}', auth=HTTPDigestAuth(default_login, default_pw),
                                 verify=False, timeout=2.0)
         print(response)
     except requests.exceptions.RequestException as e:
@@ -95,7 +93,7 @@ def http_request(default_login, default_pw, url_location):
 
     # http basic auth request (Basic Authentication uses non-encrypted base64 encoding.)
     try:
-        response = requests.get('http://' + target_ip + url_location, auth=(default_login, default_pw),
+        response = requests.get(f'http://{target_ip}{url_location}', auth=(default_login, default_pw),
                                 verify=False, timeout=2.0)
         print(response)
     except requests.exceptions.RequestException as e:
