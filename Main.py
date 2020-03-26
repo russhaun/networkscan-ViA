@@ -32,15 +32,13 @@ def network_scan(*argv):
         for host in nm.all_hosts():
             # searches for mac and vendors
             if 'mac' in nm[host]['addresses']:
-                # Initialize target_ip variable as global for use in http_request function
-                target_ip = nm[host]['addresses']
-                # regex host_ip vendor output > convert to string > strip symbols
+                # regex target_ip > convert to string > strip symbols
                 target_ip = str(nm[host]['addresses'])[10:-30]
                 for arg in argv:
                     # vendor list definition > regex nmap vendor output > convert to string > strip symbols
                     vendor = (str(re.findall(arg, str(nm[host]['vendor'])))[2:][:-2])
 
-                    # print only devices with specified vendors in vendor variable
+                    # print only devices with specified vendors in arg
                     if arg in vendor:
                         print('----------------------------------------')
                         print(target_ip)
