@@ -92,6 +92,7 @@ Replace MAC_ADDRESS with your destination MAC
 ```python3
 bt-obex -p MAC_ADDRESS /tmp/output.txt
 ```
+
 ## How it works
 ### Raspberry Pi
 ![Process flow diagram](process_flow_diagram.png)
@@ -113,6 +114,14 @@ bt-obex -p MAC_ADDRESS /tmp/output.txt
 ![Interface DOWN](interface_down.gif)
 ### Networkscan program
 ![Program flow diagram](program_flow_diagram.png)
+
+## Currently supported vendors
+- **Mobotix AG**
+- **Hangzhou Hikvision Digital Technology**
+- **Axis Communications AB**
+- **Zhejiang Dahua Technology**
+- **Panasonic Communications Co**
+- **Eaton**
 
 ## Author
 * **Toms Ozoliņš**
