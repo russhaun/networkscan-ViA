@@ -108,7 +108,7 @@ pi@raspberrypi:~ $ sudo systemctl enable networkscan
 ```
 
 ### Bluetooth destination setup
-Get your phone MAC address
+Turn on Bluetooth on your destination device and get its MAC address
 ```console
 pi@raspberrypi:~ $ sudo hcitool scan
 ```
