@@ -25,10 +25,10 @@ target_port_list = '21,22,80,81,8080'
 
 def network_scan(*argv):
     # save print output to text file
-    with open('output.txt', "w") as sys.stdout:
+    with open('/tmp/output.txt', "w") as sys.stdout:
         # scan for mac and vendor
         nm = nmap.PortScanner()
-        nm.scan(network_cidr, target_port_list, arguments='-sS')
+        nm.scan(network_cidr, target_port_list, arguments='-sS', sudo=True)
         for host in nm.all_hosts():
             # searches for mac and vendors
             if 'mac' in nm[host]['addresses']:
