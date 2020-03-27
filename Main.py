@@ -54,14 +54,14 @@ def network_scan(*argv):
 
                     def http_request(default_login, default_pw, url_location):
                         auth_methods = [HTTPBasicAuth, HTTPDigestAuth]
-                        # try Basic and Digest auth methods, if one succeeds print result, else do nothing
+                        # try Basic and Digest auth methods, only print if ath succeeds and print result
                         for auth_method in auth_methods:
                             try:
                                 response = requests.get(f'http://{target_ip}{url_location}',
                                                         auth=auth_method(default_login, default_pw),
                                                         verify=False, timeout=2.0)
                                 if response.ok:
-                                    print('Auth Success')
+                                    print(f'{str(auth_method)[22:][:-2]} success')
                                     break
                             except requests.exceptions.RequestException as e:
                                 pass
