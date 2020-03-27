@@ -1,6 +1,7 @@
 import nmap
 import re
 import requests
+from requests.auth import HTTPBasicAuth
 from requests.auth import HTTPDigestAuth
 import socket
 import sys
@@ -51,31 +52,19 @@ def network_scan(*argv):
                                 if port_state == 'open':
                                     print(f'port : {port}\tstate : {port_state}')
 
-                    # http request function
                     def http_request(default_login, default_pw, url_location):
-                        # http digest get request (Digest Authentication communicates credentials in an encrypted form by
-                        # applying a hash function to: the username, the password,
-                        # a server supplied nonce value, the HTTP method and the requested URI. )
-                        try:
-                            response = requests.get(f'http://{target_ip}{url_location}',
-                                                    auth=HTTPDigestAuth(default_login, default_pw),
-                                                    verify=False, timeout=2.0)
-                            # print only  successfull auth
-                            if response.ok:
-                                print('Auth Success')
-                        except requests.exceptions.RequestException as e:
-                            pass
-
-                        # http basic auth request (Basic Authentication uses non-encrypted base64 encoding.)
-                        try:
-                            response = requests.get(f'http://{target_ip}{url_location}',
-                                                    auth=(default_login, default_pw),
-                                                    verify=False, timeout=2.0)
-                            # print only  successfull auth
-                            if response.ok:
-                                print('Auth Success')
-                        except requests.exceptions.RequestException as e:
-                            pass
+                        auth_methods = [HTTPBasicAuth, HTTPDigestAuth]
+                        # try Basic and Digest auth methods, if one succeeds print result, else do nothing
+                        for auth_method in auth_methods:
+                            try:
+                                response = requests.get(f'http://{target_ip}{url_location}',
+                                                        auth=auth_method(default_login, default_pw),
+                                                        verify=False, timeout=2.0)
+                                if response.ok:
+                                    print('Auth Success')
+                                    break
+                            except requests.exceptions.RequestException as e:
+                                pass
 
                     # call http_request function if device vendor name contains target vendor
                     if vendor == 'Mobotix AG':
