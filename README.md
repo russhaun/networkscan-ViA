@@ -41,9 +41,11 @@
 
 
 ## Requirements
-Raspberry Pi 3/4
+- **Raspberry Pi 3 or 4**
+**(Model 1/2 not tested and bluetooth adapter required)**
 
-Raspberry Pi 1/2 not tested (external bluetooth adapter required)
+- **Python 3.6 or higher**
+
 
 ## Installation
 ### Linux software setup
