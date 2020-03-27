@@ -21,7 +21,7 @@ interface_ip = get_ip_address()
 network_cidr = interface_ip[:interface_ip.rfind('.') + 1] + '0/24'
 
 # tcp ports to scan for each vendor device
-target_port_list = '21,22,23,80,81,8080'
+ports_to_check = '21,22,23,80,81,8080'
 
 
 def network_scan(*argv):
@@ -29,16 +29,20 @@ def network_scan(*argv):
     with open('/tmp/output.txt', "w") as sys.stdout:
         # scan for mac and vendor
         nm = nmap.PortScanner()
-        nm.scan(network_cidr, target_port_list, arguments='-sS', sudo=True)
+        # scan network with specified network_cidr and ports_to_check
+        nm.scan(network_cidr, ports_to_check, arguments='-sS', sudo=True)
         for host in nm.all_hosts():
             # searches for mac and vendors
             if 'mac' in nm[host]['addresses']:
-                # regex target_ip > convert to string > strip symbols
+                target_ip = nm[host]['addresses']
+                # convert to string and strip chars for clean print
                 target_ip = str(nm[host]['addresses'])[10:-30]
                 for arg in argv:
-                    # vendor list definition > regex nmap vendor output > convert to string > strip symbols
-                    vendor = (str(re.findall(arg, str(nm[host]['vendor'])))[2:][:-2])
-
+                    vendor = nm[host]['vendor']
+                    # find vendor name with regex
+                    vendor = re.findall(arg, str(vendor))
+                    # strip chars for clean print
+                    vendor = str(vendor)[2:][:-2]
                     # print only devices with specified vendors in arg
                     if arg in vendor:
                         print('----------------------------------------')
