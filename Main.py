@@ -61,7 +61,7 @@ def network_scan(*argv):
                                                     auth=HTTPDigestAuth(default_login, default_pw),
                                                     verify=False, timeout=2.0)
                             if response.ok:
-                                print('Auth successfull')
+                                print('Auth Success')
                         except requests.exceptions.RequestException as e:
                             pass
 
@@ -71,7 +71,7 @@ def network_scan(*argv):
                                                     auth=(default_login, default_pw),
                                                     verify=False, timeout=2.0)
                             if response.ok:
-                                print('Auth successfull')
+                                print('Auth Success')
                         except requests.exceptions.RequestException as e:
                             pass
 
