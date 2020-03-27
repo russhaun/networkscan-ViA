@@ -7,13 +7,13 @@ import sys
 import subprocess
 
 
-# Get current interface ip address
+# define function get_ip_address
 def get_ip_address():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(("8.8.8.8", 80))
     return s.getsockname()[0]
 
-
+# define function network_scan
 def network_scan():
     # save print output to text file
     with open('/tmp/output.txt', "w") as sys.stdout:
@@ -24,7 +24,7 @@ def network_scan():
         # tcp ports to scan for found vendor device
         port_list = '21,22,23,80,81,8080'
         nm = nmap.PortScanner()
-        # scan network with specified network_cidr and ports_to_check
+        # scan network with specified network_cidr and port_list
         nm.scan(network_cidr, port_list, arguments='-sS', sudo=True)
         for host in nm.all_hosts():
             if 'mac' in nm[host]['addresses']:
@@ -32,7 +32,7 @@ def network_scan():
                 ip = str(nm[host]['addresses'])[10:-30]
                 vendor_list = ['Mobotix AG', 'Hangzhou Hikvision Digital Technology', 'Axis Communications AB',
                                'Zhejiang Dahua Technology', 'Panasonic Communications Co', 'Eaton']
-
+                # for each vendor in vendor_list print name, ip, open ports and do http_request
                 for vendor_string in vendor_list:
                     if vendor_string in vendor:
                         print('----------------------------------------')
@@ -93,7 +93,7 @@ def network_scan():
         print('Scanning finished.')
 
 
-# call function - scan network
+# call function network_scan
 network_scan()
 
 # send scan results output file from RPi to remote Android device via Bluetooth
