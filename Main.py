@@ -60,7 +60,8 @@ def network_scan(*argv):
                             response = requests.get(f'http://{target_ip}{url_location}',
                                                     auth=HTTPDigestAuth(default_login, default_pw),
                                                     verify=False, timeout=2.0)
-                            print(response)
+                            if response.ok:
+                                print('Auth successfull')
                         except requests.exceptions.RequestException as e:
                             pass
 
@@ -69,7 +70,8 @@ def network_scan(*argv):
                             response = requests.get(f'http://{target_ip}{url_location}',
                                                     auth=(default_login, default_pw),
                                                     verify=False, timeout=2.0)
-                            print(response)
+                            if response.ok:
+                                print('Auth successfull')
                         except requests.exceptions.RequestException as e:
                             pass
 
