@@ -20,7 +20,7 @@ interface_ip = get_ip_address()
 network_cidr = interface_ip[:interface_ip.rfind('.') + 1] + '0/24'
 
 # tcp ports to scan for each vendor device
-target_port_list = '21,22,80,81,8080'
+target_port_list = '21,22,23,80,81,8080'
 
 
 def network_scan(*argv):
@@ -60,6 +60,7 @@ def network_scan(*argv):
                             response = requests.get(f'http://{target_ip}{url_location}',
                                                     auth=HTTPDigestAuth(default_login, default_pw),
                                                     verify=False, timeout=2.0)
+                            # print only  successfull auth
                             if response.ok:
                                 print('Auth Success')
                         except requests.exceptions.RequestException as e:
@@ -70,6 +71,7 @@ def network_scan(*argv):
                             response = requests.get(f'http://{target_ip}{url_location}',
                                                     auth=(default_login, default_pw),
                                                     verify=False, timeout=2.0)
+                            # print only  successfull auth
                             if response.ok:
                                 print('Auth Success')
                         except requests.exceptions.RequestException as e:
