@@ -66,27 +66,27 @@ def network_scan():
                                     pass
 
                         # call http_request function if device vendor name contains target vendor
-                        if vendor_string == 'Mobotix AG':
+                        if 'Mobotix AG' in vendor_string:
                             # Mobotix: Default - admin/meinsm
                             http_request('admin', 'meinsm', '/control/userimage.html')
 
-                        if vendor_string == 'Hangzhou Hikvision Digital Technology':
+                        if 'Hangzhou Hikvision Digital Technology' in vendor_string:
                             # Hikvision: Firmware 5.3.0 and up requires unique password creation; previously admin/12345
                             http_request('admin', '12345', '/ISAPI/System/status')
 
-                        if vendor_string == 'Axis Communications AB':
+                        if 'Axis Communications AB' in vendor_string:
                             # Axis: Traditionally root/pass, new Axis cameras require password creation during first login
                             http_request('root', 'pass', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
 
-                        if vendor_string == 'Zhejiang Dahua Technology':
+                        if 'Zhejiang Dahua Technology' in vendor_string:
                             # Dahua: Requires password creation on first login, older models default to admin/admin
                             http_request('admin', 'admin', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
 
-                        if vendor_string == 'Panasonic Communications Co':
+                        if 'Panasonic Communications Co' in vendor_string:
                             # Panasonic TV default user: dispadmin/@Panasonic
                             http_request('dispadmin', '@Panasonic', '/cgi-bin/main.cgi')
 
-                        if vendor_string == 'Eaton':
+                        if 'Eaton' in vendor_string:
                             # Eaton UPS default user: admin/admin
                             http_request('admin', 'admin', '/set_net.htm')
 
