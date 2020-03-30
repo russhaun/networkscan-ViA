@@ -46,7 +46,7 @@ def network_scan():
                             for port in ports:
                                 port_state = nm[host][proto][port]["state"]
                                 # only print result for open ports
-                                if port_state == 'open':
+                                if 'open' in port_state:
                                     print(f'port: {port}\tstate: {port_state}')
 
                         # define http request function
