@@ -13,6 +13,7 @@ def get_ip_address():
     s.connect(("8.8.8.8", 80))
     return s.getsockname()[0]
 
+
 # define function network_scan
 def network_scan():
     # save print output to text file
@@ -23,12 +24,15 @@ def network_scan():
         network_cidr = interface_ip[:interface_ip.rfind('.') + 1] + '0/24'
         # tcp ports to scan for found vendor device
         port_list = '21,22,23,80,81,8080'
+
         nm = nmap.PortScanner()
         # scan network with specified network_cidr and port_list
         nm.scan(network_cidr, port_list, arguments='-sS', sudo=True)
+
         for host in nm.all_hosts():
             if 'mac' in nm[host]['addresses']:
                 vendor = str(nm[host]['vendor'])[23:][:-2]
+                global ip
                 ip = str(nm[host]['addresses'])[10:-30]
                 vendor_list = ['Mobotix AG', 'Hangzhou Hikvision Digital Technology', 'Axis Communications AB',
                                'Zhejiang Dahua Technology', 'Panasonic Communications Co', 'Eaton']
@@ -49,22 +53,6 @@ def network_scan():
                                 if 'open' in port_state:
                                     print(f'port: {port}\tstate: {port_state}')
 
-                        # define http request function
-                        def http_request(default_login, default_pw, url_location):
-                            auth_methods = [HTTPBasicAuth, HTTPDigestAuth]
-                            # try Basic and Digest auth methods, if auth success then print auth_method success
-                            for auth_method in auth_methods:
-                                try:
-                                    response = requests.get(f'http://{ip}{url_location}',
-                                                            auth=auth_method(default_login, default_pw),
-                                                            verify=False, timeout=2.0)
-
-                                    if response.ok:
-                                        print(f'{str(auth_method)[22:][:-2]} success')
-                                        break
-                                except requests.exceptions.RequestException as e:
-                                    pass
-
                         # call http_request function if device vendor name contains target vendor
                         if 'Mobotix AG' in vendor_string:
                             # Mobotix: Default - admin/meinsm
@@ -76,11 +64,13 @@ def network_scan():
 
                         if 'Axis Communications AB' in vendor_string:
                             # Axis: Traditionally root/pass, new Axis cameras require password creation during first login
-                            http_request('root', 'pass', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
+                            http_request('root', 'pass',
+                                         '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
 
                         if 'Zhejiang Dahua Technology' in vendor_string:
                             # Dahua: Requires password creation on first login, older models default to admin/admin
-                            http_request('admin', 'admin', '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
+                            http_request('admin', 'admin',
+                                         '/axis-cgi/admin/param.cgi?action=list&group=RemoteService')
 
                         if 'Panasonic Communications Co' in vendor_string:
                             # Panasonic TV default user: dispadmin/@Panasonic
@@ -91,6 +81,23 @@ def network_scan():
                             http_request('admin', 'admin', '/set_net.htm')
 
         print('Scanning finished.')
+
+
+# define http request function
+def http_request(default_login, default_pw, url_location):
+    auth_methods = [HTTPBasicAuth, HTTPDigestAuth]
+    # try Basic and Digest auth methods, if auth success then print auth_method success
+    for auth_method in auth_methods:
+        try:
+            response = requests.get(f'http://{ip}{url_location}',
+                                    auth=auth_method(default_login, default_pw),
+                                    verify=False, timeout=2.0)
+
+            if response.ok:
+                print(f'{str(auth_method)[22:][:-2]} success')
+                break
+        except requests.exceptions.RequestException as e:
+            pass
 
 
 # call function network_scan
